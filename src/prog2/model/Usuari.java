@@ -1,15 +1,15 @@
 package prog2.model;
 
 public abstract class Usuari implements InUsuari {
-    private String nom;
     private String email;
+    private String nom;
     private String adreca;
     private int numPrestecsNormals;
     private int numPrestecsLlargs;
 
-    public Usuari(String nom_, String email_, String adreca_) {
-        this.nom = nom_;
+    public Usuari(String email_, String nom_, String adreca_) {
         this.email = email_;
+        this.nom = nom_;
         this.adreca = adreca_;
         setNumPrestecsNormals(0);
         setNumPrestecsLlargs(0);
