@@ -1,4 +1,6 @@
 package prog2.model;
+import prog2.vista.BiblioException;
+
 import java.util.Date;
 
 public abstract class Prestec implements InPrestec{
@@ -76,6 +78,11 @@ public abstract class Prestec implements InPrestec{
 
     @Override
     public void retorna() {
+        if (this.isRetornat) {
+            throw new BiblioException("Error, prestec ja retornat");
+        }
+        this.isRetornat=true;
+
     }
 
     @Override
