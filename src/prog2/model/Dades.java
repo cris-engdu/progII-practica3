@@ -50,7 +50,7 @@ public class Dades implements InDades{
 
     @Override
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
-        //recuperar prestamo viedno poscion exemplar i usuari i veure condicions de usuari si pot fer el prestec
+        //recuperar prestamo viendo poscion exemplar i usuari i veure condicions de usuari si pot fer el prestec
     }
 
     @Override
