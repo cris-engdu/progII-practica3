@@ -16,7 +16,7 @@ public class Adaptador implements Serializable {
         try {
             FileOutputStream file = new FileOutputStream(camiDesti);
             ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(this);
+            out.writeObject(this.dades);
             out.close();
             file.close();
         } catch (IOException e) {
@@ -24,14 +24,17 @@ public class Adaptador implements Serializable {
         }
     }
 
-    public Dades carregaDades(String camiOrigen) throws BiblioException {
+    public void carregaDades(String camiOrigen) throws BiblioException {
         try {
             FileInputStream file = new FileInputStream(camiOrigen);
             ObjectInputStream in = new ObjectInputStream(file);
-            Dades dades = (Dades) in.readObject();
-            return dades;
+            this.dades = (Dades) in.readObject();
+            in.close();
+            file.close();
         } catch (IOException e) {
             throw new BiblioException("Error al carregar dades.");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

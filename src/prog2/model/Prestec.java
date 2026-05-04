@@ -1,9 +1,10 @@
 package prog2.model;
 import prog2.vista.BiblioException;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Prestec implements InPrestec{
+public abstract class Prestec implements InPrestec, Serializable {
     private Exemplar exemplar;
     private Usuari usuari;
     private Date dataCreacio;
@@ -14,6 +15,7 @@ public abstract class Prestec implements InPrestec{
         this.exemplar = exemplar_;
         this.usuari = usuari_;
         this.dataCreacio = dataCreacio_;
+        this.dataLimit=new Date();
         this.dataLimit.setTime(dataCreacio.getTime()+duradaPrestec());
         setRetornat(false);
     }
@@ -82,6 +84,13 @@ public abstract class Prestec implements InPrestec{
             throw new BiblioException("Error, prestec ja retornat");
         }
         this.isRetornat=true;
+        this.exemplar.setDisponible(true);
+
+        if (this.tipusPrestec().equals("Llarg")){
+            this.usuari.setNumPrestecsLlargs(this.usuari.getNumPrestecsLlargs()-1);
+        }else{
+            this.usuari.setNumPrestecsNormals(this.usuari.getNumPrestecsNormals()-1);
+        }
 
     }
 
@@ -90,7 +99,10 @@ public abstract class Prestec implements InPrestec{
 
     @Override
     public boolean prestecEndarrerit() {
+        if (this.isRetornat){
+            return false;
+        }
         Date dataAvui = new Date();
-        return dataLimit.after(dataAvui);
+        return dataAvui.after(dataLimit);
     }
 }

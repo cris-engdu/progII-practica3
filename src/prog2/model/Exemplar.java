@@ -1,6 +1,9 @@
 package prog2.model;
 
-public class Exemplar implements InExemplar{
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Exemplar implements InExemplar, Serializable {
     private String id;
     private String titol;
     private String autor;

@@ -1,6 +1,8 @@
 package prog2.model;
 
-public abstract class Usuari implements InUsuari {
+import java.io.Serializable;
+
+public abstract class Usuari implements InUsuari, Serializable {
     private String email;
     private String nom;
     private String adreca;
@@ -52,7 +54,7 @@ public abstract class Usuari implements InUsuari {
 
     @Override
     public String tipusUsuari() {
-        return this.getClass().getName();
+        return this.getClass().getSimpleName();
     }
 
     @Override
