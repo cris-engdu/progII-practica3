@@ -54,7 +54,7 @@ public class Dades implements InDades, Serializable {
      *, comprova els casos on la posicio del exemplar o del usuari es correcte o no, si no salta cap excepcio creem els objectes de cada tipus
      * una altra excepcio si el prestec no admet el llarg pero li hem passat que si, llavors excepcio,
      * despres fem un iterador on llançem diferents excepcions, es comprova si el prestec es llarg o no i si l'usuari supera el seu maxim
-     un cop tot comprovat creem els objectes i si el prestec es llarg el creem com llarg o sino co normal.
+     un cop tot comprovat creem els objectes i si el prestec es llarg el creem com llarg o sino com normal.
      * a més, augmenten el prestec d'aquell tipus i el posem com no disponible
      * */
      @Override
