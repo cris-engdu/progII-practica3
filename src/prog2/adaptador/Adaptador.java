@@ -55,6 +55,10 @@ public class Adaptador implements Serializable {
         dades.afegirPrestec(exemplarPos, usuariPos, esLlarg);
     }
 
+    public void retornarPrestec(int prestecPos) throws BiblioException {
+        dades.retornarPrestec(prestecPos);
+    }
+
     public ArrayList<String> llistarUsuaris() {
         ArrayList<String> strLlista = new ArrayList<String>();
         ArrayList<Usuari> llistaUsuaris = dades.recuperaUsuaris();
@@ -73,12 +77,21 @@ public class Adaptador implements Serializable {
         return strLlista;
     }
 
-    public ArrayList<String> llistarPrestec() {
+    //@param noRetornats -> true: mostra només els préstecs no retornats | false: mostra tots els préstecs
+    public ArrayList<String> llistarPrestec(boolean noRetornats) {
         ArrayList<String> strLlista = new ArrayList<String>();
-        ArrayList<Prestec> llistaPrestecs = dades.recuperaPrestecs();
-        for (Prestec prestec : llistaPrestecs) {
-            strLlista.add(prestec.toString());
+        ArrayList<Prestec> llistaPrestecs = null;
+
+        if (noRetornats) {
+            llistaPrestecs = dades.recuperaPrestecsNoRetornats();
+        } else {
+            llistaPrestecs =  dades.recuperaPrestecs();
         }
+
+        for (Prestec prestec : llistaPrestecs) {
+                    strLlista.add(prestec.toString());
+        }
+
         return strLlista;
     }
 }

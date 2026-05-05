@@ -197,7 +197,11 @@ public class BiblioUB {
             }
         } while (!prestec.equals("y") && !prestec.equals("n"));
 
-        adaptador.afegirExemplar(id, titol, autor, admetPrestec);
+        try {
+            adaptador.afegirExemplar(id, titol, autor, admetPrestec);
+        } catch (BiblioException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void menuGestioUsuaris(Scanner sc) {
@@ -250,7 +254,12 @@ public class BiblioUB {
                 System.out.println("Format incorrecte");
             }
         } while (!estudiant.equals("y") && !estudiant.equals("n"));
-        adaptador.afegirUsuari(email, nom, adreca, esEstudiant);
+
+        try {
+            adaptador.afegirUsuari(email, nom, adreca, esEstudiant);
+        } catch (BiblioException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void menuGestioPrestecs(Scanner sc) {
@@ -263,12 +272,16 @@ public class BiblioUB {
 
             switch (opcio) {
                 case MENU_GESTIO_PRESTECS_ADD:
+                    afegirPrestec(sc);
                     break;
                 case MENU_GESTIO_PRESTECS_REMOVE:
+                    cancelarPrestec(sc);
                     break;
                 case MENU_GESTIO_PRESTECS_VIEW:
+                    showList("PRÉSTECS", adaptador.llistarPrestec(false));
                     break;
                 case MENU_GESTIO_PRESTECS_VIEW_URG:
+                    showList("PRÉSTECS NO RETORNATS", adaptador.llistarPrestec(true));
                     break;
                 case MENU_GESTIO_PRESTECS_EXIT:
                     break;
@@ -283,10 +296,44 @@ public class BiblioUB {
      */
     
     private void afegirPrestec(Scanner sc){
+        System.out.println("Introdueix la posició de l'usuari en la llista: ");
+        int posUsuari = sc.nextInt();
+        sc.nextLine();
 
+        System.out.println("Introdueix la posició de l'exemplar en la llista: ");
+        int posExemplar = sc.nextInt();
+        sc.nextLine();
+
+        boolean esLlarg = false;
+        String llarg = "";
+        do {
+            System.out.println("És un préstec llarg? (y/n): ");
+            llarg = sc.next();
+            if (llarg.equals("y")) {
+                esLlarg = true;
+            } else  if (llarg.equals("n")) {
+                esLlarg = false;
+            } else  {
+                System.out.println("Format incorrecte");
+            }
+        }
+        while (!llarg.equals("y") && !llarg.equals("n"));
+
+        try {
+            adaptador.afegirPrestec(posExemplar, posUsuari, esLlarg);
+        } catch (BiblioException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void cancelarPrestec(Scanner sc){
+        System.out.println("Introdueix la posició del préstec a retornar en la llista: ");
+        int posPrestec = sc.nextInt();
+        try {
+            adaptador.retornarPrestec(posPrestec);
+        } catch (BiblioException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
      /**
