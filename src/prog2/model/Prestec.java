@@ -24,7 +24,7 @@ public abstract class Prestec implements InPrestec, Serializable {
         return "Tipus=" + tipusPrestec() + ", Exemplar=" + exemplar.getTitol() + ", Usuari= " + usuari.getNom() +
                 ", Data de creacio =" + dataCreacio + ", Data de limite =" + dataLimit + ", Retornat=" + isRetornat;
     }
-
+/** funcions de setters i getters de les variables de prestec*/
     @Override
     public void setExemplar(Exemplar exemplar) {
         this.exemplar = exemplar;
@@ -78,6 +78,9 @@ public abstract class Prestec implements InPrestec, Serializable {
         return isRetornat;
     }
 
+    /** en aquesta funcio de retorna fem que si ja ha estat retornat llança excepcio i sino el fem que ja ha estat retornat i el marquem com a disponible
+     * i per ultim si el prestec es llarg o normal el restem als que te ja l'usuari fets
+     */
     @Override
     public void retorna() {
         if (this.isRetornat) {
@@ -97,6 +100,7 @@ public abstract class Prestec implements InPrestec, Serializable {
     @Override
     public abstract long duradaPrestec();
 
+    /** en aquesta unicament comprovem que el prestec no estigui retornat ja i sino comprovem que la data actual no superi la data limit del prestec */
     @Override
     public boolean prestecEndarrerit() {
         if (this.isRetornat){

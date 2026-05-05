@@ -22,7 +22,7 @@ public class Exemplar implements InExemplar, Serializable {
     public String toString() {
         return "Id=" + id + ", Titol=" + titol + ", Autor=" + autor + ", Admet Prestec Llarg=" + admetPrestecLlarg + ", Disponible=" + isDisponible;
     }
-
+/** funcions de getters i de setters dels diferents atributs*/
     @Override
     public void setId(String id) {
         this.id = id;

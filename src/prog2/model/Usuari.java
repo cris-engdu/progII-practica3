@@ -21,7 +21,7 @@ public abstract class Usuari implements InUsuari, Serializable {
         return "Tipus=" + this.tipusUsuari() + ", Email=" + this.email + ", Nom=" + this.nom + ", Adreca=" + this.adreca +
                 "Num. prestecs normals= " + this.numPrestecsNormals + ", Num. prestecs llargs=" + this.numPrestecsLlargs;
     }
-
+/** getters i setters*/
     @Override
     public void setEmail(String email) {
         this.email = email;
