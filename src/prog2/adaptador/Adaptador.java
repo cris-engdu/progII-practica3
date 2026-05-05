@@ -11,7 +11,7 @@ public class Adaptador implements Serializable {
     public Adaptador() {
         this.dades = new Dades();
     }
-/** funcio per guardar les dades on creem els objectes necessaris i despres els tanquem perque es guardin correctament*/
+/** funcio per guardar les dades on creem els objectes necessaris i despres els tanquem perque es guardin correctament i no hi hagi cap problema*/
     public void guardaDades(String camiDesti) throws BiblioException {
         try {
             FileOutputStream file = new FileOutputStream(camiDesti);
