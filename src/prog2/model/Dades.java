@@ -18,13 +18,14 @@ public class Dades implements InDades, Serializable {
         llistaUsuaris=new LlistaUsuaris();
         llistaPrestecs=new LlistaPrestecs();
     }
+    /** com en la classe de llista exemplars ja hem fet la funcio d'afegir nomes creem un objecte d'aquest tipus i cridem a la funcio*/
     @Override
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
             Exemplar ex= new Exemplar(id, titol, autor, admetPrestecLlarg);
             llistaExemplars.afegir(ex);
     }
 
-
+/**cridem a la funcio definida a llista a partir de la llista d'exemplars*/
     @Override
     public ArrayList<Exemplar> recuperaExemplars() {
 
@@ -32,7 +33,7 @@ public class Dades implements InDades, Serializable {
     }
 
 
-
+/**mateix cas que en afegir exemplars, pero aqui hem de crear si es estudiant o si es professor*/
     @Override
     public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
             Usuari us;
@@ -43,21 +44,30 @@ public class Dades implements InDades, Serializable {
             }
             llistaUsuaris.afegir(us);
     }
-
+    /** recuperem la llista d'usuaris a traves de la funcio definida a llista*/
     @Override
     public ArrayList<Usuari> recuperaUsuaris() {
         return llistaUsuaris.getArrayList();
     }
 
-    @Override
+    /**en aquesta com que prestec no te cap funcio propia haurem d'utilitzar iteradors per poder fer-la
+     *, comprova els casos on la posicio del exemplar o del usuari es correcte o no, si no salta cap excepcio creem els objectes de cada tipus
+     * una altra excepcio si el prestec no admet el llarg pero li hem passat que si, llavors excepcio,
+     * despres fem un iterador on llançem diferents excepcions, es comprova si el prestec es llarg o no i si l'usuari supera el seu maxim
+     un cop tot comprovat creem els objectes i si el prestec es llarg el creem com llarg o sino com normal.
+     * a més, augmenten el prestec d'aquell tipus i el posem com no disponible
+     * */
+     @Override
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
 
-        if (exemplarPos < 0 || exemplarPos >= llistaExemplars.getSize()) {
+
+    if (exemplarPos < 0 || exemplarPos >= llistaExemplars.getSize()) {
             throw new BiblioException(("Error, posicio del exemplar no valida"));
         }
         if ((usuariPos < 0) || usuariPos >= llistaUsuaris.getSize()) {
             throw new BiblioException("Error, posicio de l'usuari no valida");
         }
+
         Exemplar ex = llistaExemplars.getAt(exemplarPos);
         Usuari us = llistaUsuaris.getAt(usuariPos);
 
@@ -75,6 +85,7 @@ public class Dades implements InDades, Serializable {
                 throw new BiblioException("Error,l'usuari te prestecs endarrerits");
             }
         }
+
         if (esLlarg){
             if (us.getNumPrestecsLlargs()>=us.getMaxPrestecsLlargs()){
                 throw new BiblioException("Error, l'usuari excedeix el limit prestecs llargs");
@@ -99,7 +110,7 @@ public class Dades implements InDades, Serializable {
         }
         llistaPrestecs.afegir(nouP);
     }
-
+/** per retornar el prestec cridem a la funcio que ens retorna la posicio i cridem a la funcio de retornar*/
     @Override
     public void retornarPrestec(int position) throws BiblioException {
             if (position < 0 || position>=llistaPrestecs.getSize()){
@@ -109,12 +120,16 @@ public class Dades implements InDades, Serializable {
                pr.retorna();
 
     }
-
+/** mateix que en les altres, cridar a la funcio definida a llista*/
     @Override
     public ArrayList<Prestec> recuperaPrestecs() {
         return llistaPrestecs.getArrayList();
     }
 
+    /** en aquesta funcio fem un iterador per poder recorrer la llista de prestecs i comprovem si ha estta retornat o no i els
+     * anem afegint els que no ho estan
+     * @return llista de prestecs no retornats
+     */
     @Override
     public ArrayList<Prestec> recuperaPrestecsNoRetornats() {
         ArrayList<Prestec> prestecs=new ArrayList<>();

@@ -10,7 +10,7 @@ public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
     public LlistaUsuaris() {
         super();
     }
-
+/** mateix funcio que en llista exemplars on aqui es comprova si l'email esta repetit i sino afegim l'usuari*/
     @Override
     public void afegir(Usuari usuari) throws BiblioException {
         Iterator<Usuari> it = llista.iterator();
@@ -22,7 +22,7 @@ public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
         }
         llista.add(usuari);
     }
-
+/** mateix també, comprovem si l'email passat com a paramtre el conte algu usuari en la llista*/
     public boolean contains(String email) {
         Iterator<Usuari> it = llista.iterator();
         while (it.hasNext()) {
