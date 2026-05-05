@@ -176,6 +176,7 @@ public class BiblioUB {
      */
     
     private void afegirPrestec(Scanner sc){
+
     }
 
     private void cancelarPrestec(Scanner sc){
