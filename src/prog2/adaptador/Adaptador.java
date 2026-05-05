@@ -1,9 +1,14 @@
 package prog2.adaptador;
 
 import prog2.model.Dades;
+import prog2.model.Exemplar;
+import prog2.model.Prestec;
+import prog2.model.Usuari;
 import prog2.vista.BiblioException;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Adaptador implements Serializable {
     private Dades dades;
@@ -38,4 +43,42 @@ public class Adaptador implements Serializable {
         }
     }
 
+    public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
+        dades.afegirExemplar(id, titol, autor, admetPrestecLlarg);
+    }
+
+    public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
+        dades.afegirUsuari(email, nom, adreca, esEstudiant);
+    }
+
+    public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
+        dades.afegirPrestec(exemplarPos, usuariPos, esLlarg);
+    }
+
+    public ArrayList<String> llistarUsuaris() {
+        ArrayList<String> strLlista = new ArrayList<String>();
+        ArrayList<Usuari> llistaUsuaris = dades.recuperaUsuaris();
+        for (Usuari usuari : llistaUsuaris) {
+            strLlista.add(usuari.toString());
+        }
+        return strLlista;
+    }
+
+    public ArrayList<String> llistarExemplars() {
+        ArrayList<String> strLlista = new ArrayList<String>() ;
+        ArrayList<Exemplar> llistaExemplars = dades.recuperaExemplars();
+        for (Exemplar exemplar : llistaExemplars) {
+            strLlista.add(exemplar.toString());
+        }
+        return strLlista;
+    }
+
+    public ArrayList<String> llistarPrestec() {
+        ArrayList<String> strLlista = new ArrayList<String>();
+        ArrayList<Prestec> llistaPrestecs = dades.recuperaPrestecs();
+        for (Prestec prestec : llistaPrestecs) {
+            strLlista.add(prestec.toString());
+        }
+        return strLlista;
+    }
 }

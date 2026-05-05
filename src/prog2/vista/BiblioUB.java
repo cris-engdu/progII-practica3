@@ -146,6 +146,27 @@ public class BiblioUB {
     }
     
     private void menuGestioExemplars(Scanner sc) {
+        Menu<OpcionsMenuGestioExemplars> menuExemplars = new Menu<>("Menu Gestió Exemplars", OpcionsMenuGestioExemplars.values());
+
+        menuExemplars.setDescripcions(descMenuGestioExemplars);
+        OpcionsMenuGestioExemplars opcio;
+        do {
+            menuExemplars.mostrarMenu();
+            opcio = menuExemplars.getOpcio(sc);
+
+            switch(opcio) {
+                case MENU_GESTIO_EXEMPLARS_ADD:
+                    afegirExemplar(sc);
+                    break;
+                case MENU_GESTIO_EXEMPLARS_VIEW:
+                    showList("EXEMPLARS", adaptador.llistarExemplars());
+                    break;
+                case MENU_GESTIO_EXEMPLARS_EXIT:
+                    break;
+
+            }
+        }
+        while (opcio != OpcionsMenuGestioExemplars.MENU_GESTIO_EXEMPLARS_EXIT);
     }
     
     /**
@@ -153,10 +174,52 @@ public class BiblioUB {
      * @param sc
      */
     
-    private void afegirExemplar(Scanner sc){
+    private void afegirExemplar(Scanner sc) {
+        System.out.println("Introdueix l'id de l'exemplar: ");
+        String id = sc.nextLine();
+
+        System.out.println("Introdueix el titol de l'exemplar: ");
+        String titol = sc.nextLine();
+
+        System.out.println("Introdueix l'autor de l'exemplar: ");
+        String autor = sc.nextLine();
+        String prestec;
+        boolean admetPrestec = false;
+        do {
+            System.out.println("L'exemplar admet prèstec llarg: (y/n)");
+            prestec = sc.nextLine();
+            if (prestec.equals("y")) {
+                admetPrestec = true;
+            } else if (prestec.equals("n")) {
+                admetPrestec = false;
+            } else {
+                System.out.println("Format incorrecte");
+            }
+        } while (!prestec.equals("y") && !prestec.equals("n"));
+
+        adaptador.afegirExemplar(id, titol, autor, admetPrestec);
     }
 
     private void menuGestioUsuaris(Scanner sc) {
+        Menu<OpcionsMenuGestioClients> menuClients = new Menu<>("Menu Gestió Clients",  OpcionsMenuGestioClients.values());
+        menuClients.setDescripcions(descMenuGestioUsuaris);
+
+        OpcionsMenuGestioClients opcio;
+        do {
+            menuClients.mostrarMenu();
+            opcio = menuClients.getOpcio(sc);
+            switch(opcio) {
+                case MENU_GESTIO_USUARIS_ADD:
+                    afegirUsuari(sc);
+                    break;
+                case MENU_GESTIO_USUARIS_VIEW:
+                    showList("USUARIS", adaptador.llistarUsuaris());
+                    break;
+                case MENU_GESTIO_USUARIS_EXIT:
+                    break;
+            }
+        }
+        while (opcio != OpcionsMenuGestioClients.MENU_GESTIO_USUARIS_EXIT);
     }
     
     /**
@@ -165,9 +228,53 @@ public class BiblioUB {
      */
     
     private void afegirUsuari(Scanner sc){
+        System.out.println("Introdueix l'email de l'usuari: ");
+        String email = sc.nextLine();
+
+        System.out.println("Introdueix el nom de l'usuari: ");
+        String nom = sc.nextLine();
+
+        System.out.println("Introdueix l'adreça de l'usuari: ");
+        String adreca = sc.nextLine();
+
+        String estudiant;
+        boolean esEstudiant = false;
+        do {
+            System.out.println("L'usuari es estudiant (y/n): ");
+            estudiant = sc.nextLine();
+            if (estudiant.equals("y")) {
+                esEstudiant = true;
+            } else if (estudiant.equals("n")) {
+                esEstudiant = false;
+            } else {
+                System.out.println("Format incorrecte");
+            }
+        } while (!estudiant.equals("y") && !estudiant.equals("n"));
+        adaptador.afegirUsuari(email, nom, adreca, esEstudiant);
     }
 
     private void menuGestioPrestecs(Scanner sc) {
+        Menu<OpcionsMenuGestioPrestecs> menuPrestecs = new Menu<>("Menu Gestió Prestecs",  OpcionsMenuGestioPrestecs.values());
+        menuPrestecs.setDescripcions(descMenuGestioPrestecs);
+        OpcionsMenuGestioPrestecs opcio;
+        do {
+            menuPrestecs.mostrarMenu();
+            opcio = menuPrestecs.getOpcio(sc);
+
+            switch (opcio) {
+                case MENU_GESTIO_PRESTECS_ADD:
+                    break;
+                case MENU_GESTIO_PRESTECS_REMOVE:
+                    break;
+                case MENU_GESTIO_PRESTECS_VIEW:
+                    break;
+                case MENU_GESTIO_PRESTECS_VIEW_URG:
+                    break;
+                case MENU_GESTIO_PRESTECS_EXIT:
+                    break;
+            }
+
+        } while (opcio != OpcionsMenuGestioPrestecs.MENU_GESTIO_PRESTECS_EXIT);
     }
     
     /**
@@ -176,6 +283,7 @@ public class BiblioUB {
      */
     
     private void afegirPrestec(Scanner sc){
+
     }
 
     private void cancelarPrestec(Scanner sc){
