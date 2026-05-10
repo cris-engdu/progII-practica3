@@ -12,7 +12,7 @@ public class Dades implements InDades, Serializable {
     private LlistaExemplars llistaExemplars;
     private LlistaUsuaris llistaUsuaris;
     private LlistaPrestecs llistaPrestecs;
-
+/** constructor on s'inicialitzen les llistes*/
     public Dades(){
         llistaExemplars=new LlistaExemplars();
         llistaUsuaris=new LlistaUsuaris();

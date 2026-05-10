@@ -10,7 +10,7 @@ public abstract class Prestec implements InPrestec, Serializable {
     private Date dataCreacio;
     private Date dataLimit;
     private boolean isRetornat;
-
+/** constructor de prestec*/
     public Prestec(Exemplar exemplar_, Usuari usuari_, Date dataCreacio_) {
         this.exemplar = exemplar_;
         this.usuari = usuari_;
@@ -24,55 +24,67 @@ public abstract class Prestec implements InPrestec, Serializable {
         return "Tipus=" + tipusPrestec() + ", Exemplar=" + exemplar.getTitol() + ", Usuari= " + usuari.getNom() +
                 ", Data de creacio =" + dataCreacio + ", Data de limite =" + dataLimit + ", Retornat=" + isRetornat;
     }
-/** funcions de setters i getters de les variables de prestec*/
+    /** setter d'exemplar*/
+
     @Override
     public void setExemplar(Exemplar exemplar) {
         this.exemplar = exemplar;
     }
+    /** getter d'exemplar*/
 
     @Override
     public Exemplar getExemplar() {
         return exemplar;
     }
 
+    /** setter d'usuari*/
+
     @Override
     public void setUsuari(Usuari usuari) {
         this.usuari = usuari;
     }
+    /** getter d'usuari*/
 
     @Override
     public Usuari getUsuari() {
         return usuari;
     }
 
+    /** setter per definir la data de creació*/
     @Override
     public void setDataCreacio(Date data) {
         this.dataCreacio = data;
     }
 
+    /** getter de la data de creació del prestec*/
     @Override
     public Date getDataCreacio() {
         return dataCreacio;
     }
 
+    /** setter per definir la data de retorn*/
     @Override
     public void setDataLimitRetorn(Date data) {
         this.dataLimit = data;
     }
 
+    /** getter per retornar la data de limit*/
     @Override
     public Date getDataLimitRetorn() {
         return dataLimit;
     }
 
+    /** funcio abstracte ja que necessita que cada classe filla d'aquesta especifiqui quin tipus de prestec es*/
     @Override
     public abstract String tipusPrestec();
 
+    /** setter per definir si el prestec ha estat retornat*/
     @Override
     public void setRetornat(boolean retornat) {
         this.isRetornat = retornat;
     }
 
+    /** getter per si ha estat retornat el prestec*/
     @Override
     public boolean getRetornat() {
         return isRetornat;
@@ -97,7 +109,7 @@ public abstract class Prestec implements InPrestec, Serializable {
 
     }
 
-    @Override
+    /** funcio abstracte ja que necessita que cada classe filla d'aquesta especifiqui la durada del prestec*/
     public abstract long duradaPrestec();
 
     /** en aquesta unicament comprovem que el prestec no estigui retornat ja i sino comprovem que la data actual no superi la data limit del prestec */

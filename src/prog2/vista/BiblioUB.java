@@ -144,7 +144,7 @@ public class BiblioUB {
             }
         } while(opcio != OpcionsMenuPrincipal.MENU_PRINCIPAL_EXIT);
     }
-    
+    /** menu per gestionar els exemplars*/
     private void menuGestioExemplars(Scanner sc) {
         Menu<OpcionsMenuGestioExemplars> menuExemplars = new Menu<>("Menu Gestió Exemplars", OpcionsMenuGestioExemplars.values());
 
@@ -156,9 +156,11 @@ public class BiblioUB {
 
             switch(opcio) {
                 case MENU_GESTIO_EXEMPLARS_ADD:
+                    //primera opcio, es crida a la funcio d'afegir exemplar
                     afegirExemplar(sc);
                     break;
                 case MENU_GESTIO_EXEMPLARS_VIEW:
+                    // aqui es mostren tots els exemplars
                     showList("EXEMPLARS", adaptador.llistarExemplars());
                     break;
                 case MENU_GESTIO_EXEMPLARS_EXIT:
@@ -185,6 +187,7 @@ public class BiblioUB {
         String autor = sc.nextLine();
         String prestec;
         boolean admetPrestec = false;
+        //bucle que acabara quan l'usuari o indiqui que vol prestec llarg o noi
         do {
             System.out.println("L'exemplar admet prèstec llarg: (y/n)");
             prestec = sc.nextLine();
@@ -203,7 +206,7 @@ public class BiblioUB {
             System.err.println(e.getMessage());
         }
     }
-
+/** menu per gestionar les opcions dels usuaris*/
     private void menuGestioUsuaris(Scanner sc) {
         Menu<OpcionsMenuGestioClients> menuClients = new Menu<>("Menu Gestió Clients",  OpcionsMenuGestioClients.values());
         menuClients.setDescripcions(descMenuGestioUsuaris);
@@ -214,9 +217,11 @@ public class BiblioUB {
             opcio = menuClients.getOpcio(sc);
             switch(opcio) {
                 case MENU_GESTIO_USUARIS_ADD:
+                    //primera cas on s'afegeix als usuaris
                     afegirUsuari(sc);
                     break;
                 case MENU_GESTIO_USUARIS_VIEW:
+                    // es mostren els usuaris
                     showList("USUARIS", adaptador.llistarUsuaris());
                     break;
                 case MENU_GESTIO_USUARIS_EXIT:
@@ -254,14 +259,14 @@ public class BiblioUB {
                 System.out.println("Format incorrecte");
             }
         } while (!estudiant.equals("y") && !estudiant.equals("n"));
-
+// una vegada introduides les dades essencials per l'usuari, si tot es correcte s'afegeix
         try {
             adaptador.afegirUsuari(email, nom, adreca, esEstudiant);
         } catch (BiblioException e) {
             System.err.println(e.getMessage());
         }
     }
-
+/** menu per gestionar les opcions del prestecs*/
     private void menuGestioPrestecs(Scanner sc) {
         Menu<OpcionsMenuGestioPrestecs> menuPrestecs = new Menu<>("Menu Gestió Prestecs",  OpcionsMenuGestioPrestecs.values());
         menuPrestecs.setDescripcions(descMenuGestioPrestecs);
@@ -272,15 +277,19 @@ public class BiblioUB {
 
             switch (opcio) {
                 case MENU_GESTIO_PRESTECS_ADD:
+                    //primer cas, on s'afegeix els prestecs
                     afegirPrestec(sc);
                     break;
                 case MENU_GESTIO_PRESTECS_REMOVE:
+                    //aqui es cancel·len, es a dir, retornar el prestec
                     cancelarPrestec(sc);
                     break;
                 case MENU_GESTIO_PRESTECS_VIEW:
+                    // es crida a la funcio de mostrar els prestecs definida a adaptador
                     showList("PRÉSTECS", adaptador.llistarPrestec(false));
                     break;
                 case MENU_GESTIO_PRESTECS_VIEW_URG:
+                    //mateixa funcio que en cas anterior per nomes es mostren els prestecs no retornats
                     showList("PRÉSTECS NO RETORNATS", adaptador.llistarPrestec(true));
                     break;
                 case MENU_GESTIO_PRESTECS_EXIT:
@@ -318,17 +327,18 @@ public class BiblioUB {
             }
         }
         while (!llarg.equals("y") && !llarg.equals("n"));
-
+        //una vegada totes les dades son correctes si tot funciona bé, s'afegeix el prestec
         try {
             adaptador.afegirPrestec(posExemplar, posUsuari, esLlarg);
         } catch (BiblioException e) {
             System.out.println(e.getMessage());
         }
     }
-
+/** funcio que fa la cancelacio del prestec*/
     private void cancelarPrestec(Scanner sc){
         System.out.println("Introdueix la posició del préstec a retornar en la llista: ");
         int posPrestec = sc.nextInt();
+        //si la posicio del prestec es correcta es retorna cridant a la funcio retornar d'adaptador
         try {
             adaptador.retornarPrestec(posPrestec);
         } catch (BiblioException e) {

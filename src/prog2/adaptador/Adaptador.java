@@ -42,22 +42,26 @@ public class Adaptador implements Serializable {
             throw new RuntimeException(e);
         }
     }
-
+/** Utilitzem la classe dades per afegir els exemplars*/
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
         dades.afegirExemplar(id, titol, autor, admetPrestecLlarg);
     }
+    /** Utilitzem la classe dades per afegir els usuaris*/
 
     public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
         dades.afegirUsuari(email, nom, adreca, esEstudiant);
     }
+    /** Utilitzem la classe dades per afegir els prestecs*/
 
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
         dades.afegirPrestec(exemplarPos, usuariPos, esLlarg);
     }
+    /** Utilitzem la classe dades per retornar els prestecs*/
 
     public void retornarPrestec(int prestecPos) throws BiblioException {
         dades.retornarPrestec(prestecPos);
     }
+    /** Utilitzem la classe dades per mostrar els usuaris*/
 
     public ArrayList<String> llistarUsuaris() {
         ArrayList<String> strLlista = new ArrayList<String>();
@@ -67,6 +71,7 @@ public class Adaptador implements Serializable {
         }
         return strLlista;
     }
+    /** Utilitzem la classe dades per mostrar els exemplars*/
 
     public ArrayList<String> llistarExemplars() {
         ArrayList<String> strLlista = new ArrayList<String>() ;
@@ -77,7 +82,8 @@ public class Adaptador implements Serializable {
         return strLlista;
     }
 
-    //@param noRetornats -> true: mostra només els préstecs no retornats | false: mostra tots els préstecs
+    /** Utilitzem la classe dades per mostrar els prestecs, on si es true mostra nomes els no retornats
+     *  i si es false tots els prestecs.*/
     public ArrayList<String> llistarPrestec(boolean noRetornats) {
         ArrayList<String> strLlista = new ArrayList<String>();
         ArrayList<Prestec> llistaPrestecs = null;

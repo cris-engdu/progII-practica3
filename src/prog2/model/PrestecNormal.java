@@ -3,7 +3,7 @@ package prog2.model;
 import java.util.Date;
 
 public class PrestecNormal extends Prestec{
-
+/** constructor de prestec normal*/
     public PrestecNormal(Exemplar exemplar_, Usuari usuari_, Date dataCreacio_) {
         super(exemplar_, usuari_, dataCreacio_);
     }
