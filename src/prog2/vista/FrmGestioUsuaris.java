@@ -6,28 +6,26 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class FrmGestioUsuaris extends JDialog {
+public class FrmGestioUsuaris extends JFrame {
     private JPanel contentPane;
     private JList lstUsuaris;
     private JButton btnAcceptar;
     private JButton btnTancar;
     private Adaptador adaptador;
 
-    public FrmGestioUsuaris(JFrame parent, Adaptador adaptador) {
-        super(parent);
+    public FrmGestioUsuaris(Adaptador adaptador){
         this.adaptador=adaptador;
         setContentPane(contentPane);
         setSize(700,400);
-        setModal(true);
         setTitle("Gestio d'usuaris");
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(null);
 
         llistaUsuaris();
         btnAcceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmAfegirUsuari dialog = new FrmAfegirUsuari(parent, adaptador);
-                dialog.setVisible(true);
+                FrmAfegirUsuari afegirUsuari = new FrmAfegirUsuari(adaptador);
+                afegirUsuari.setVisible(true);
                 llistaUsuaris();
             }
         });
@@ -56,4 +54,4 @@ public class FrmGestioUsuaris extends JDialog {
 
 
 
-    }
+}

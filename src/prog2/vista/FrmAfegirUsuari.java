@@ -18,7 +18,7 @@ public class FrmAfegirUsuari extends JDialog {
 
 
 
-    public FrmAfegirUsuari(JFrame parent, Adaptador adaptador) {
+    public FrmAfegirUsuari(Adaptador adaptador) {
         super(parent);
         this.adaptador=adaptador;
         setContentPane(contentPane);
@@ -37,18 +37,17 @@ public class FrmAfegirUsuari extends JDialog {
                 boolean esEstudiant= chkEstudiant.isSelected();
             try {
 
-
                 adaptador.afegirUsuari(email, nom, adreca, esEstudiant);
-                dispose();
             } catch (BiblioException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
             }
-
+            dispose();
             }
         });
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 dispose();
             }
         });
