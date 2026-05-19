@@ -16,7 +16,7 @@ public class FrmGestioUsuaris extends JFrame {
     public FrmGestioUsuaris(Adaptador adaptador){
         this.adaptador=adaptador;
         setContentPane(contentPane);
-        setSize(700,400);
+        pack();
         setTitle("Gestio d'usuaris");
         setLocationRelativeTo(null);
 

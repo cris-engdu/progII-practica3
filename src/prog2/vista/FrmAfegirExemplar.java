@@ -21,7 +21,7 @@ public class FrmAfegirExemplar extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         setTitle("Afegir Exemplar");
-        pack();
+        setSize(400,300);
         setLocationRelativeTo(parent);
 
 
@@ -30,6 +30,7 @@ public class FrmAfegirExemplar extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try{
                     adaptador.afegirExemplar(txtId.getText(),txtTitol.getText(),txtAutor.getText(),ckPrestecLlarg.isSelected());
+                    dispose();
                 } catch (BiblioException ex ) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
                 }

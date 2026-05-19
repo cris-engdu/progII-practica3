@@ -27,9 +27,9 @@ public class FrmGestioExemplars extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try{
                     FrmAfegirExemplar afegirExemplar= new FrmAfegirExemplar(FrmGestioExemplars.this,adaptador);
-                    afegirExemplar.pack();
                     afegirExemplar.setVisible(true);
                     FrmGestioExemplars.this.omplirLlistaExemplars();
+                    afegirExemplar.pack();
 
                 }catch (Exception ex){
                     JOptionPane.showMessageDialog(FrmGestioExemplars.this,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
