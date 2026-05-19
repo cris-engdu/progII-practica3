@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class AppBiblioUB extends JFrame {
     private JPanel contentPane;
     private JButton btnGestioUsuaris;
-
+    private JButton btnGestioExemplars;
 
 
     private Adaptador adaptador;
@@ -25,8 +25,16 @@ public class AppBiblioUB extends JFrame {
         btnGestioUsuaris.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioUsuaris dialog= new FrmGestioUsuaris(AppBiblioUB.this, adaptador);
+                FrmGestioUsuaris dialog= new FrmGestioUsuaris(adaptador);
                 dialog.setVisible(true);
+            }
+        });
+        btnGestioExemplars.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmGestioExemplars Exemplar= new FrmGestioExemplars(adaptador);
+                Exemplar.setVisible(true);
+
             }
         });
     }

@@ -24,7 +24,7 @@ public class FrmGestioUsuaris extends JFrame {
         btnAcceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmAfegirUsuari afegirUsuari = new FrmAfegirUsuari(adaptador);
+                FrmAfegirUsuari afegirUsuari = new FrmAfegirUsuari(FrmGestioUsuaris.this,adaptador);
                 afegirUsuari.setVisible(true);
                 llistaUsuaris();
             }
@@ -33,7 +33,7 @@ public class FrmGestioUsuaris extends JFrame {
         btnTancar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                FrmGestioUsuaris.this.dispose();
             }
         });
 

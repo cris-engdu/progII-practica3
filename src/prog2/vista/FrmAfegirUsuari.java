@@ -11,14 +11,14 @@ public class FrmAfegirUsuari extends JDialog {
     private JTextField txtEmail;
     private JTextField txtNom;
     private JTextField txtAdreca;
-    private JCheckBox chkEstudiant;
+    private JCheckBox ckEstudiant;
     private JButton btnAfegir;
     private JButton btnCancelar;
     private Adaptador adaptador;
 
 
 
-    public FrmAfegirUsuari(Adaptador adaptador) {
+    public FrmAfegirUsuari(JFrame parent,Adaptador adaptador) {
         super(parent);
         this.adaptador=adaptador;
         setContentPane(contentPane);
@@ -34,7 +34,7 @@ public class FrmAfegirUsuari extends JDialog {
                 String email= txtEmail.getText();
                 String nom= txtNom.getText();
                 String adreca=txtAdreca.getText();
-                boolean esEstudiant= chkEstudiant.isSelected();
+                boolean esEstudiant= ckEstudiant.isSelected();
             try {
 
                 adaptador.afegirUsuari(email, nom, adreca, esEstudiant);
