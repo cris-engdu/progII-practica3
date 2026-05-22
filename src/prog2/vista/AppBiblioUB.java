@@ -10,6 +10,7 @@ public class AppBiblioUB extends JFrame {
     private JPanel contentPane;
     private JButton btnGestioUsuaris;
     private JButton btnGestioExemplars;
+    private JButton btnGestioPrestec;
 
 
     private Adaptador adaptador;
@@ -35,6 +36,13 @@ public class AppBiblioUB extends JFrame {
                 FrmGestioExemplars Exemplar= new FrmGestioExemplars(adaptador);
                 Exemplar.setVisible(true);
 
+            }
+        });
+        btnGestioPrestec.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmGestioPrestecs Prestec= new FrmGestioPrestecs(adaptador);
+                Prestec.setVisible(true);
             }
         });
     }
