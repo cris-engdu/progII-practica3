@@ -15,7 +15,7 @@ public class AppBiblioUB extends JFrame {
     private JButton btnCarregarDades;
 
 
-    public Adaptador adaptador;
+    private Adaptador adaptador;
 
 
     public AppBiblioUB(){
@@ -69,8 +69,7 @@ public class AppBiblioUB extends JFrame {
         SwingUtilities.invokeLater(() ->{
             AppBiblioUB app = new AppBiblioUB();
             app.setVisible(true);
-            FrmGestioPrestecs prestecs= new FrmGestioPrestecs(app.adaptador);
-            prestecs.setVisible(true);
+
         });
 
     }
