@@ -1,50 +1,52 @@
 package prog2.vista;
 
+import prog2.adaptador.Adaptador;
+
 import javax.swing.*;
 import java.awt.event.*;
 
 public class FrmAfegirPrestec extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton btnAfegirPretec;
+    private JButton btnCancelar;
+    private JComboBox cbExemplars;
+    private JComboBox cbUsuaris;
+    private JCheckBox ckEsllarg;
+    private Adaptador adaptador;
 
-    public FrmAfegirPrestec() {
+    public FrmAfegirPrestec(JFrame parent, Adaptador adaptador) {
+        this.adaptador=adaptador;
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        setTitle("Afegir Prestec");
+        setLocationRelativeTo(parent);
+        setSize(850,400);
+        combos();
 
-        buttonOK.addActionListener(new ActionListener() {
+        btnAfegirPretec.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         });
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
 
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void onOK() {
         // add your code here
+        try{
+            adaptador.afegirPrestec(cbExemplars.getSelectedIndex(),cbUsuaris.getSelectedIndex(),ckEsllarg.isSelected());
+            dispose();
 
-        dispose();
+        }catch(BiblioException ex){
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void onCancel() {
@@ -52,10 +54,14 @@ public class FrmAfegirPrestec extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        FrmAfegirPrestec dialog = new FrmAfegirPrestec();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    private void combos(){
+        for (String ex: adaptador.llistarExemplars() ){
+            cbExemplars.addItem(ex);
+        }
+        for (String us: adaptador.llistarUsuaris()){
+            cbUsuaris.addItem(us);
+        }
     }
+
+
 }

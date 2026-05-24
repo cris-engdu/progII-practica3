@@ -3,71 +3,83 @@ package prog2.vista;
 import prog2.adaptador.Adaptador;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-public class FrmGestioPrestecs extends JDialog {
-    private Adaptador adaptador;
-    private JPanel contentPane;
+public class FrmGestioPrestecs extends JFrame {
     private JList lstPrestecs;
-    private JCheckBox chkRetornats;
+    private JCheckBox ckRetornats;
     private JButton btnAfegirPrestec;
-    private JButton btnSortir;
-    private JButton btnRetornarPrestec;
+    private JButton btnRetPrestec;
+    private JButton btnCancelar;
+    private JPanel contentPane;
+    private Adaptador adaptador;
 
     public FrmGestioPrestecs(Adaptador adaptador) {
-        this.adaptador = adaptador;
+        this.adaptador=adaptador;
         setContentPane(contentPane);
-        setSize(700, 400);
-        setModal(true);
+        setTitle("Gestio Prestecs");
+        pack();
         setLocationRelativeTo(null);
-        chkRetornats.setSelected(true);
+        llistaPrestecs();
+
 
         btnAfegirPrestec.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmAfegirPrestec frmAfegirPrestec = new FrmAfegirPrestec(adaptador);
-                frmAfegirPrestec.setVisible(true);
+                    FrmAfegirPrestec AfegirPrestec= new FrmAfegirPrestec(FrmGestioPrestecs.this,adaptador);
+                    AfegirPrestec.setVisible(true);
+                    AfegirPrestec.pack();
+                    FrmGestioPrestecs.this.llistaPrestecs();
+
+
 
             }
         });
-        btnRetornarPrestec.addActionListener(new ActionListener() {
+        btnRetPrestec.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    FrmRetornarPrestec frmRetornarPrestec = new FrmRetornarPrestec(adaptador);
-                    frmRetornarPrestec.pack();
-                    frmRetornarPrestec.setVisible(true);
-                    llistaPrestecs(chkRetornats.isSelected());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this,
-                                                                ex.getMessage(),
-                                                                "Error",
-                                                                JOptionPane.ERROR_MESSAGE);
+                int pos=lstPrestecs.getSelectedIndex();
+                if (pos!=-1){
+                    try{
+                        adaptador.retornarPrestec(pos);
+                        JOptionPane.showMessageDialog(FrmGestioPrestecs.this,"El prestec s'ha retornat correctament","Exit",JOptionPane.INFORMATION_MESSAGE);
+                        llistaPrestecs();
+                    }catch (BiblioException ex){
+                        JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }else if (pos==-1){
+                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this,"Has de seleccionar un prestec","Avis",JOptionPane.WARNING_MESSAGE);
+
                 }
             }
         });
-        btnSortir.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                FrmGestioPrestecs.this.dispose();
+
             }
         });
-        chkRetornats.addActionListener(new ActionListener() {
+
+        ckRetornats.addChangeListener(new ChangeListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                llistaPrestecs(chkRetornats.isSelected());
+            public void stateChanged(ChangeEvent e) {
+                llistaPrestecs();
             }
         });
     }
-
-    public void llistaPrestecs(boolean noRetornats) {
-        ArrayList<String> prestecs = adaptador.llistarPrestec(noRetornats);
-        DefaultListModel<String> model = new DefaultListModel<>();
-        for (String p : prestecs) {
-            model.addElement(p);
+    private void llistaPrestecs(){
+        DefaultListModel<String> model= new DefaultListModel<>();
+        for (String pr: adaptador.llistarPrestec(ckRetornats.isSelected())){
+            model.addElement(pr);
         }
         lstPrestecs.setModel(model);
     }
+
+
+
 }
