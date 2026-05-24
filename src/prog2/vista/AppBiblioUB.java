@@ -15,7 +15,7 @@ public class AppBiblioUB extends JFrame {
     private JButton btnCarregarDades;
 
 
-    private Adaptador adaptador;
+    public Adaptador adaptador;
 
 
     public AppBiblioUB(){
@@ -25,6 +25,7 @@ public class AppBiblioUB extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(500,400);
         setLocationRelativeTo(null);
+
         btnGestioUsuaris.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,6 +69,8 @@ public class AppBiblioUB extends JFrame {
         SwingUtilities.invokeLater(() ->{
             AppBiblioUB app = new AppBiblioUB();
             app.setVisible(true);
+            FrmGestioPrestecs prestecs= new FrmGestioPrestecs(app.adaptador);
+            prestecs.setVisible(true);
         });
 
     }

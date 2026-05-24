@@ -17,6 +17,7 @@ public class FrmAfegirUsuari extends JDialog {
     private Adaptador adaptador;
 
 
+    /** Constructor per gestionar la finestra de dialeg d'afegir usuaris*/
 
     public FrmAfegirUsuari(JFrame parent,Adaptador adaptador) {
         super(parent);
@@ -35,13 +36,19 @@ public class FrmAfegirUsuari extends JDialog {
                 String nom= txtNom.getText();
                 String adreca=txtAdreca.getText();
                 boolean esEstudiant= ckEstudiant.isSelected();
-            try {
+                if (email.isEmpty() || nom.isEmpty() || adreca.isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Omple tots els camps","Avis", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
+            try {
+                //cridar funcio afegir usuari
                 adaptador.afegirUsuari(email, nom, adreca, esEstudiant);
+                JOptionPane.showMessageDialog(FrmAfegirUsuari.this, "Usuari afegit correctament.", "Exit",JOptionPane.INFORMATION_MESSAGE);
+                dispose();
             } catch (BiblioException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
             }
-            dispose();
             }
         });
         btnCancelar.addActionListener(new ActionListener() {

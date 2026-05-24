@@ -100,4 +100,16 @@ public class Adaptador implements Serializable {
 
         return strLlista;
     }
+/** funcio nova per quan filtrem per prestecs no retornats poder retornar-los correctament amb la seva posicio*/
+    public ArrayList<Integer> getPosicionsNoRetornats(){
+        ArrayList<Integer> posicions= new ArrayList<>();
+        ArrayList<Prestec> pr=dades.recuperaPrestecs();
+        for (int i=0;i<pr.size();i++){
+            Prestec prestec=pr.get(i);
+            if (!prestec.getRetornat()){
+                posicions.add(i);
+            }
+        }
+        return posicions;
+    }
 }

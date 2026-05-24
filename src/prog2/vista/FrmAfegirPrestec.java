@@ -13,6 +13,7 @@ public class FrmAfegirPrestec extends JDialog {
     private JComboBox cbUsuaris;
     private JCheckBox ckEsllarg;
     private Adaptador adaptador;
+    /** Constructor per gestionar la finestra de dialeg d'afegir prestecs*/
 
     public FrmAfegirPrestec(JFrame parent, Adaptador adaptador) {
         this.adaptador=adaptador;
@@ -41,7 +42,9 @@ public class FrmAfegirPrestec extends JDialog {
     private void onOK() {
         // add your code here
         try{
+            //cridem funcio adaptador per afegir el prestec
             adaptador.afegirPrestec(cbExemplars.getSelectedIndex(),cbUsuaris.getSelectedIndex(),ckEsllarg.isSelected());
+            JOptionPane.showMessageDialog(FrmAfegirPrestec.this, "Prestec afegit correctament.", "Exit",JOptionPane.INFORMATION_MESSAGE);
             dispose();
 
         }catch(BiblioException ex){
@@ -55,6 +58,7 @@ public class FrmAfegirPrestec extends JDialog {
     }
 
     private void combos(){
+        // per mostrar la llista d'exemplars cridem a les funcions de llistar i els anem afegint
         for (String ex: adaptador.llistarExemplars() ){
             cbExemplars.addItem(ex);
         }

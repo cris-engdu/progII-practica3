@@ -15,6 +15,7 @@ public class FrmGuardarDades extends JFrame {
     private JTextField txtNomFitxer;
     private JButton btnSelecciona;
     private JButton btnSortir;
+    /** Constructor per gestionar el formulari de guardar dades*/
 
     public FrmGuardarDades(Adaptador adaptador) {
         this.adaptador=adaptador;

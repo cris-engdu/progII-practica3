@@ -8,10 +8,11 @@ import java.util.ArrayList;
 
 public class FrmGestioUsuaris extends JFrame {
     private JPanel contentPane;
-    private JList lstUsuaris;
+    private JList<String> lstUsuaris;
     private JButton btnAcceptar;
     private JButton btnTancar;
     private Adaptador adaptador;
+    /** Constructor per gestionar el formulari de gestio d'usuaris*/
 
     public FrmGestioUsuaris(Adaptador adaptador){
         this.adaptador=adaptador;
@@ -38,6 +39,7 @@ public class FrmGestioUsuaris extends JFrame {
         });
 
     }
+    /** metode per mostar els usuaris*/
 
     private void llistaUsuaris(){
         ArrayList<String>Usuaris = adaptador.llistarUsuaris();

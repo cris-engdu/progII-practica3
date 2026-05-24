@@ -9,9 +9,10 @@ import java.awt.event.ActionListener;
 public class FrmGestioExemplars extends javax.swing.JFrame {
     private JPanel contentPane;
     private Adaptador  adaptador;
-    private JList lstExemplars;
+    private JList<String> lstExemplars;
     private JButton btnAcceptar;
     private JButton btnCancelar;
+    /** Constructor per gestionar el formulari de gestio d'exemplars*/
 
     public FrmGestioExemplars(Adaptador adaptador) {
         this.adaptador=adaptador;
@@ -44,6 +45,7 @@ public class FrmGestioExemplars extends javax.swing.JFrame {
         });
     }
 
+    /** metode per mostar els exemplars*/
     private void omplirLlistaExemplars(){
         DefaultListModel<String> model = new DefaultListModel<>();
         for (String m: adaptador.llistarExemplars()){

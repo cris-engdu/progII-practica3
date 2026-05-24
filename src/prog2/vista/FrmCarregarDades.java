@@ -15,6 +15,7 @@ public class FrmCarregarDades extends JFrame {
     private JButton btnCancelar;
     private Adaptador adaptador;
     private File fitxer;
+    /** Constructor per gestionar el formulari per carregar dades*/
 
     public FrmCarregarDades(Adaptador adaptador) {
         this.adaptador=adaptador;
@@ -53,6 +54,7 @@ public class FrmCarregarDades extends JFrame {
                     try {
                         adaptador.carregaDades(fitxer.getPath());
                         JOptionPane.showMessageDialog(FrmCarregarDades.this, "Les dades s'han carregat correctament.", "Exit",JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
                     } catch (BiblioException ex){
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
                     }

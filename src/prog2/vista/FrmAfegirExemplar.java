@@ -15,7 +15,7 @@ public class FrmAfegirExemplar extends JDialog {
     private JTextField txtAutor;
     private JCheckBox ckPrestecLlarg;
     private Adaptador adaptador;
-
+/** Constructor per gestionar la finestra de dialeg d'afegir exemplars*/
     public FrmAfegirExemplar(JFrame parent, Adaptador adaptador) {
         this.adaptador=adaptador;
         setContentPane(contentPane);
@@ -28,8 +28,14 @@ public class FrmAfegirExemplar extends JDialog {
         btnAfegir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().isEmpty() || txtTitol.getText().isEmpty()|| txtAutor.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Omple tots els camps","Avis", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 try{
+                    //cridem funcio adaptador per afegir exemplar
                     adaptador.afegirExemplar(txtId.getText(),txtTitol.getText(),txtAutor.getText(),ckPrestecLlarg.isSelected());
+                    JOptionPane.showMessageDialog(FrmAfegirExemplar.this, "Exemplar afegit correctament", "Exit",JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                 } catch (BiblioException ex ) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
