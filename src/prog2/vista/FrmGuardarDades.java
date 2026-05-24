@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 public class FrmGuardarDades extends JFrame {
     private Adaptador adaptador;
@@ -14,7 +13,7 @@ public class FrmGuardarDades extends JFrame {
     private JPanel contentPane;
     private JTextField txtNomFitxer;
     private JButton btnSelecciona;
-    private JButton btnSortir;
+    private JButton btnCancelar;
     /** Constructor per gestionar el formulari de guardar dades*/
 
     public FrmGuardarDades(Adaptador adaptador) {
@@ -36,6 +35,7 @@ public class FrmGuardarDades extends JFrame {
                     try {
                         adaptador.guardaDades(fitxer.getPath());
                         JOptionPane.showMessageDialog(FrmGuardarDades.this, "Les dades s'han guardat correctament.", "Exit",JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
                     } catch (BiblioException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -43,7 +43,7 @@ public class FrmGuardarDades extends JFrame {
             }
         });
 
-        btnSortir.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmGuardarDades.this.dispose();
