@@ -1,14 +1,18 @@
 package prog2.vista;
 
+import prog2.adaptador.Adaptador;
+
 import javax.swing.*;
 import java.awt.event.*;
 
-public class FrmAfegirPrestec extends JDialog {
+public class FrmRetornarPrestec extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private Adaptador adaptador;
 
-    public FrmAfegirPrestec() {
+    public FrmRetornarPrestec(Adaptador adaptador) {
+        this.adaptador = adaptador;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -43,7 +47,6 @@ public class FrmAfegirPrestec extends JDialog {
 
     private void onOK() {
         // add your code here
-
         dispose();
     }
 
@@ -53,7 +56,7 @@ public class FrmAfegirPrestec extends JDialog {
     }
 
     public static void main(String[] args) {
-        FrmAfegirPrestec dialog = new FrmAfegirPrestec();
+        FrmRetornarPrestec dialog = new FrmRetornarPrestec();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
